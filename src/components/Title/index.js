@@ -1,7 +1,7 @@
 import React from 'react';
 import './style.css';
 
-function Title(setTitle) {
+function Title({setTitle}) {
   return (
     <>
     <div class="title">

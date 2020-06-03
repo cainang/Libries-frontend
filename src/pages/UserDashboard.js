@@ -5,7 +5,7 @@ const UserDashboard = () => {
   
   return (
     <>
-      <Header />
+      <Header dashboard={true}/>
       <h1>Home</h1>
     </>
   );

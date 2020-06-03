@@ -2,23 +2,35 @@ import React from 'react';
 import {Link} from 'react-router-dom';
 import './style.css';
 
-function Header() {
+function Header({dashboard}) {
   return (
     <>
-    <div class="header">
-        <h2 class="logo">Libries</h2>
+    <div className="header">
+        <h2 className="logo">Libries</h2>
         <input type="checkbox" name="" id="chk"/>
-        <label for="chk" class="show-menu-btn">
-            <i class="fas fa-ellipsis-h"></i>
+        <label for="chk" className="show-menu-btn">
+            <i className="fas fa-ellipsis-h"></i>
         </label>
 
-        <ul class="menu" id="#f8a213">
-            <Link to="/dashboard">Dashboard</Link>
-            <Link to="/account">Conta</Link>
-            <label for="chk" class="hide-menu-btn">
-                <i class="fas fa-times"></i>
-            </label>
-        </ul>
+        {dashboard === true && (
+            <ul className="menu" id="#f8a213">
+                <Link to="/dashboard">Página Inicial</Link>
+                <Link to="/account">Conta</Link>
+                <label for="chk" className="hide-menu-btn">
+                    <i className="fas fa-times"></i>
+                </label>
+            </ul>
+        )}
+        {dashboard === false && (
+            <ul className="menu" id="#f8a213">
+                <Link to="/dashboard">Página Inicial</Link>
+                <Link to="/login">Entrar</Link>
+                <Link to="/signup">Cadastre-se</Link>
+                <label for="chk" className="hide-menu-btn">
+                    <i className="fas fa-times"></i>
+                </label>
+            </ul>
+        )}
     </div>
     </>
     );

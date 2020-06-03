@@ -1,5 +1,6 @@
 import React, { useCallback, useContext } from "react";
 import { withRouter, Redirect } from "react-router";
+import { Link } from "react-router-dom";
 import app from "./../firebase/base.js";
 import { AuthContext } from "./../firebase/Auth.js";
 import firebase from 'firebase';
@@ -58,6 +59,7 @@ const Login = ({ history }) => {
           </div>
           <input class="btn" type="submit" value="Entrar"/>
           <button class="btn" style={{background: "#FFF", color: "#000"}} onClick={handleLoginGoogle}><img style={{width: "20px", height: "20px", marginRight: "19px"}} src='https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg'/> Logar com Google</button>
+          <Link to='/signup'><input class="btn" type="submit" value="Cadastra-se"/></Link>
         </form>
     </div>
   );

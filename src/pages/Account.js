@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import app from "../firebase/base.js";
 import firebase from 'firebase';
 import Header from "../components/Header";
+import Title from "../components/Title";
 import './styles/account.css';
 
 
@@ -19,10 +20,8 @@ const Account = () => {
   }
   return (
     <>
-      <Header />
-      <div class="title">
-        <h1>Sua Conta</h1>
-      </div>
+      <Header dashboard={true}/>
+      <Title setTitle="Sua Conta" />
       <div class="section">
           <div class="profile">
               {photoUrl !== null && (<img src={photoUrl} />)}
