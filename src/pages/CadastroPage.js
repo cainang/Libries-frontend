@@ -22,32 +22,7 @@ const CadastroPage = () => {
     <>
       <Header dashboard={true}/>
       <Title setTitle="Sua Conta" />
-      <div className="section">
-          <div className="profile">
-              {photoUrl !== null && (<img src={photoUrl} />)}
-              {photoUrl == null && (<img src="https://anebrasil.org.br/wp-content/uploads/2016/06/img-user-geral.png" />)}
-              {name !== null && (<h2>{name}</h2>)}
-              {name == null && (<h2><Link style={{color: "#000", textDecoration: "none"}} to="/dashboard">Nome do Usuario</Link></h2>)}
-              
-          </div>
-          <div className="config">
-              <div className="con">
-                  <i className="fa fa-lock" aria-hidden="true"></i>
-                  <p>Trocar de Senha</p>
-              </div>
-              <div className="con">
-                  <i className="fa fa-user" aria-hidden="true"></i>
-                  <p>Trocar Nome</p>
-              </div>
-              <div className="con">
-                  <button onClick={() => app.auth().signOut()} style={{display: "flex", background: "transparent", border: "none", cursor: "pointer"}}>
-                    <i className="fas fa-sign-out-alt" aria-hidden="true"></i>
-                    <p>Sair</p>
-                  </button>
-              </div>
-          </div>
-          
-      </div>
+      
       
     </>
   );

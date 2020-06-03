@@ -8,6 +8,7 @@ import Home from "./pages/Home";
 import SignUp from "./pages/SignUp";
 import { AuthProvider } from "./firebase/Auth";
 import PrivateRoute from "./firebase/PrivateRoute";
+import CadastroPage from "./pages/CadastroPage";
 
 const App = () => {
   return (
@@ -16,6 +17,7 @@ const App = () => {
         <div>
           <PrivateRoute exact path="/dashboard" component={UserDashboard} />
           <PrivateRoute exact path="/account" component={Account} />
+          <PrivateRoute exact path="/cadex" component={CadastroPage} />
           <Route exact path="/login" component={Login} />
           <Route exact path="/" component={Home} />
           <Route exact path="/signup" component={SignUp} />

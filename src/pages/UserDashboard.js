@@ -1,4 +1,5 @@
 import React,{ useState, useEffect } from "react";
+import { Link } from 'react-router-dom';
 import Header from './../components/Header';
 import Title from './../components/Title';
 import firebase from 'firebase';
@@ -35,7 +36,7 @@ const UserDashboard = () => {
       {!name && (<Title setTitle={`Bem-Vindo!`}/>)}
       <div id="caduser">
           <h2>Cadastrar Nova Expressão?</h2>
-          <button id='btn'>Cadastar!</button>
+          <Link to='/cadex'><button id='btn'>Cadastar!</button></Link>
       </div>
       <div id="caduser">
         <h2>Expressões Cadastradas</h2>
