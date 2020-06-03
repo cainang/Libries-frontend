@@ -4,7 +4,7 @@ import './style.css';
 function Title({setTitle}) {
   return (
     <>
-    <div class="title">
+    <div className="title">
         <h1>{setTitle}</h1>
     </div>
     </>

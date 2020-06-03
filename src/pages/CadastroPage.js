@@ -8,7 +8,7 @@ import Title from "../components/Title";
 import './styles/account.css';
 
 
-const Account = () => {
+const CadastroPage = () => {
   var user = firebase.auth().currentUser;
   var name, email, photoUrl, uid, emailVerified;
 
@@ -53,4 +53,4 @@ const Account = () => {
   );
 };
 
-export default withRouter(Account);
+export default withRouter(CadastroPage);
