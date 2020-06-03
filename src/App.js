@@ -1,26 +1,28 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import "./App.css";
+import { BrowserRouter as Router, Route } from "react-router-dom";
+import UserDashboard from "./pages/UserDashboard";
+import Account from "./pages/Account";
+import Login from "./pages/Login";
+import Home from "./pages/Home";
+import SignUp from "./pages/SignUp";
+import { AuthProvider } from "./firebase/Auth";
+import PrivateRoute from "./firebase/PrivateRoute";
 
-function App() {
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <AuthProvider>
+      <Router>
+        <div>
+          <PrivateRoute exact path="/dashboard" component={UserDashboard} />
+          <PrivateRoute exact path="/account" component={Account} />
+          <Route exact path="/login" component={Login} />
+          <Route exact path="/" component={Home} />
+          <Route exact path="/signup" component={SignUp} />
+        </div>
+      </Router>
+    </AuthProvider>
   );
-}
+};
 
 export default App;

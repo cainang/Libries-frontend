@@ -1,0 +1,43 @@
+body{
+    background: #fff;
+}
+.title{
+    margin-left: 5vh;
+    margin-bottom: 20px;
+    margin-top: 20px;
+}
+
+.section{
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.profile{
+    text-align: center;
+}
+
+.profile img{
+    border-radius: 100%;
+    margin-bottom: 20px;
+}
+
+.config .con{
+    display: flex;
+    margin-bottom: 20px;
+}
+
+.config .con i{
+    margin-right: 10px;
+    font-size: 20px;
+}
+
+.config .con p{
+    font-size: 20px;
+}
+
+.config .con:hover{
+    cursor: pointer;
+}
