@@ -8,7 +8,7 @@ function Header({dashboard}) {
     <div className="header">
         <h2 className="logo">Libries</h2>
         <input type="checkbox" name="" id="chk"/>
-        <label for="chk" className="show-menu-btn">
+        <label htmlFor="chk" className="show-menu-btn">
             <i className="fas fa-ellipsis-h"></i>
         </label>
 
@@ -16,17 +16,17 @@ function Header({dashboard}) {
             <ul className="menu" id="#f8a213">
                 <Link to="/dashboard">Página Inicial</Link>
                 <Link to="/account">Conta</Link>
-                <label for="chk" className="hide-menu-btn">
+                <label htmlFor="chk" className="hide-menu-btn">
                     <i className="fas fa-times"></i>
                 </label>
             </ul>
         )}
         {dashboard === false && (
             <ul className="menu" id="#f8a213">
-                <Link to="/dashboard">Página Inicial</Link>
+                <Link to="/">Página Inicial</Link>
                 <Link to="/login">Entrar</Link>
                 <Link to="/signup">Cadastre-se</Link>
-                <label for="chk" className="hide-menu-btn">
+                <label htmlFor="chk" className="hide-menu-btn">
                     <i className="fas fa-times"></i>
                 </label>
             </ul>

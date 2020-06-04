@@ -1,5 +1,5 @@
 import React,{ useState, useEffect } from "react";
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import Header from './../components/Header';
 import Title from './../components/Title';
 import firebase from 'firebase';
@@ -25,8 +25,16 @@ const UserDashboard = () => {
       //libries.push(liuser.data);
       setCu(liuser.data);
     })
-    //console.log(libries);
-  }, []);
+    console.log(cu);
+  }, [cu]);
+
+  const handleDelete = async (id) => {
+    await api.delete(`libries/${id}`)
+  }
+
+  if(name == null){
+    return <Redirect to="/account/editname"/>;
+  }
   
 
   return (
@@ -47,12 +55,27 @@ const UserDashboard = () => {
           return (
             <div className="card" key={lib.id}>
                 <div className="span">
+                  <div style={{display: "flex"}}>
+                  <button onClick={() => handleDelete(lib.id)} style={{background: "none", border: "none", fontSize: "20px", cursor: "pointer"}}>
+                      <i className="fa fa-trash" aria-hidden="true" style={{color: "#fff", marginBottom: "10px"}}></i>
+                    </button>
+                    <Link to={`/dashboard/edit/${lib.id}`}>
+                      <button style={{background: "none", border: "none", fontSize: "20px", cursor: "pointer", marginLeft:"30px"}}>
+                        <i className="fa fa-edit" aria-hidden="true" style={{color: "#fff", marginBottom: "10px"}}></i>
+                      </button>
+                    </Link>
+                  </div>
+                    
                     <span>{lib.expressao}</span><br/>
                     <span className="category" style={{background: 'red'}}>{lib.condicao == false ? 'Em Análise':'Analizado'}</span>
                 </div>
             </div>
           )
         })}
+
+        {cu.length == 0 && (
+          <h2 style={{color:"#aaa"}}>Você não tem Nenhuma Expressão Cadastrada!</h2>
+        )}
         
       </div>
     </>

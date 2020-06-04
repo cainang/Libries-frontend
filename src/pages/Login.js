@@ -59,7 +59,8 @@ const Login = ({ history }) => {
           </div>
           <input className="btn" type="submit" value="Entrar"/>
           <button className="btn" style={{background: "#FFF", color: "#000"}} onClick={handleLoginGoogle}><img style={{width: "20px", height: "20px", marginRight: "19px"}} src='https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg'/> Logar com Google</button>
-          <Link to='/signup'><input className="btn" type="submit" value="Cadastra-se"/></Link>
+          <Link to='/signup'><input className="btn" type="button" value="Cadastra-se"/></Link>
+          <Link to='/'><input className="btn" type="button" value="Voltar"/></Link>
         </form>
     </div>
   );
