@@ -26,13 +26,18 @@ const CadastroPage = () => {
       const { namex, link } = event.target.elements;
       const expressao = namex.value;
       const url_expressao = link.value;
-      const data = {
-        id_user: uid,
-        autor: name,
-        expressao,
-        url_expressao,
-        condicao: false
-      };
+      var data = {};
+      if(url_expressao.indexOf("watch?v") !== -1 || url_expressao.indexOf("https://youtu.be/") !== -1){
+        var data = {
+          id_user: uid,
+          autor: name,
+          expressao,
+          url_expressao,
+          condicao: false
+        };
+      } else {
+        return alert("Link Incorreto: Url Copie o Link do Youtube!");
+      }
       try {
         await api.post('libries', data);
         alert("Expressão Cadastrada com Sucesso!");

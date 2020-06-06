@@ -1,16 +1,17 @@
 import React,{ useState, useEffect } from "react";
 import { Link, Redirect } from 'react-router-dom';
+import { confirmAlert } from 'react-confirm-alert';
+import 'react-confirm-alert/src/react-confirm-alert.css';
 import Header from './../components/Header';
 import Title from './../components/Title';
 import firebase from 'firebase';
-import './styles/userdashboard.css';
-import api from './../services/api';
-import { confirmAlert } from 'react-confirm-alert';
+import './styles/admindashboard.css'
+import api from './../services/api'
 
 
-const UserDashboard = () => {
+const AdminDashboard = () => {
   var user = firebase.auth().currentUser;
-  var name, email, photoUrl, uid;
+  var name,email, photoUrl, uid;
 
   if (user != null) {
     name = user.displayName;
@@ -20,16 +21,15 @@ const UserDashboard = () => {
   }
   const libries = [];
   const [cu,setCu] = useState([]);
+  
 
   useEffect(() => {
-    api.get(`libries/user/${uid}`).then(liuser => {
-      //console.log(liuser)
-      //libries.push(liuser.data);
+    api.get(`libries`).then(liuser => {
       setCu(liuser.data);
     })
   }, [cu]);
 
-  const handleDelete = async (id, exp) => {
+  const handleDelete = async (id,exp) => {
     const options = {
       title: `Deletar: ${exp}`,
       message: "Você Realmente deseja Apagar essa Expressão?",
@@ -50,20 +50,15 @@ const UserDashboard = () => {
   if(name == null){
     return <Redirect to="/account/editname"/>;
   }
-  if(email == 'admin@admin.com'){
-    return <Redirect to="/dashboard/admin"/>;
+  if(email !== 'admin@admin.com'){
+    return <Redirect to="/dashboard"/>;
   }
-  
 
   return (
     <>
       <Header dashboard={true}/>
       {name && (<Title setTitle={`Bem-Vindo, ${name}!`}/>)}
       {!name && (<Title setTitle={`Bem-Vindo!`}/>)}
-      <div id="caduser">
-          <h2>Cadastrar Nova Expressão?</h2>
-          <Link to='/cadex'><button id='btn'>Cadastar!</button></Link>
-      </div>
       <div id="caduser">
         <h2>Expressões Cadastradas</h2>
       </div>
@@ -77,14 +72,15 @@ const UserDashboard = () => {
                   <button onClick={() => handleDelete(lib.id, lib.expressao)} style={{background: "none", border: "none", fontSize: "20px", cursor: "pointer"}}>
                       <i className="fa fa-trash" aria-hidden="true" style={{color: "#fff", marginBottom: "10px"}}></i>
                     </button>
-                    <Link to={`/dashboard/edit/${lib.id}`}>
+                    <Link to={`/dashboard/admin/view/${lib.id}`}>
                       <button style={{background: "none", border: "none", fontSize: "20px", cursor: "pointer", marginLeft:"30px"}}>
-                        <i className="fa fa-edit" aria-hidden="true" style={{color: "#fff", marginBottom: "10px"}}></i>
+                        <i className="fa fa-eye" aria-hidden="true" style={{color: "#fff", marginBottom: "10px"}}></i>
                       </button>
                     </Link>
                   </div>
                     
                     <span>{lib.expressao}</span><br/>
+                    <span>{lib.autor}</span><br/>
                     <span className="category" style={lib.condicao == false ? {background: 'red'} : {background: 'green'}}>{lib.condicao == false ? 'Em Análise':'Analizado'}</span>
                 </div>
             </div>
@@ -100,4 +96,4 @@ const UserDashboard = () => {
   );
 };
 
-export default UserDashboard;
+export default AdminDashboard;
