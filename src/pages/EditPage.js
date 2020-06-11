@@ -33,16 +33,40 @@ const EditPage = () => {
     })
   }, []);
 
+  function titleize(text) {
+    var loweredText = text.toLowerCase();
+    var words = loweredText.split(" ");
+    for (var a = 0; a < words.length; a++) {
+        var w = words[a];
+
+        var firstLetter = w[0];
+
+        if( w.length > 2){ 
+           w = firstLetter.toUpperCase() + w.slice(1);
+        } else {
+           w = firstLetter + w.slice(1);
+        }
+
+        words[a] = w;
+    }
+    return words.join(" ");
+}
+
   const handleEdit = useCallback(
     async event => {
       event.preventDefault();
       const { namex, link } = event.target.elements;
       const expressao = namex.value;
       const url_expressao = link.value;
-      const data = {
-        expressao,
-        url_expressao
-      };
+      var data = {};
+      if(url_expressao.indexOf("embed") !== -1 || url_expressao.indexOf("watch?v") !== -1 || url_expressao.indexOf("https://youtu.be/") !== -1){
+        var data = {
+          expressao: titleize(expressao),
+          url_expressao,
+        };
+      } else {
+        return alert("Link Incorreto: Url Copie o Link do Youtube!");
+      }
       try {
         await api.put(`libries/${idpage}`, data);
         alert("Expressão Alterada com Sucesso!");

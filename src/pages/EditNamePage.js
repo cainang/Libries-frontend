@@ -20,6 +20,25 @@ const EditNamePage = () => {
     uid = user.uid; 
   }
 
+  function titleize(text) {
+    var loweredText = text.toLowerCase();
+    var words = loweredText.split(" ");
+    for (var a = 0; a < words.length; a++) {
+        var w = words[a];
+
+        var firstLetter = w[0];
+
+        if( w.length > 2){ 
+           w = firstLetter.toUpperCase() + w.slice(1);
+        } else {
+           w = firstLetter + w.slice(1);
+        }
+
+        words[a] = w;
+    }
+    return words.join(" ");
+}
+
   const handleEditName = useCallback(
     async event => {
       event.preventDefault();
@@ -29,7 +48,7 @@ const EditNamePage = () => {
         return;
       }
       user.updateProfile({
-        displayName: newnome,
+        displayName: titleize(newnome),
       }).then(function() {
         alert("Nome Alterado Com Sucesso!");
         history.push('/account');

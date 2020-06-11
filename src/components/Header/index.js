@@ -1,9 +1,9 @@
-import React from 'react';
-import {Link} from 'react-router-dom';
+import React, { useCallback } from 'react';
+import {Link, useHistory, Redirect} from 'react-router-dom';
 import firebase from 'firebase';
 import './style.css';
 
-function Header({dashboard}) {
+function Header({dashboard, account = true}) {
     var user = firebase.auth().currentUser;
     var name, email, photoUrl, uid, emailVerified;
 
@@ -13,6 +13,41 @@ function Header({dashboard}) {
         photoUrl = user.photoURL;
         uid = user.uid; 
     }
+
+    const history = useHistory();
+
+    function titleize(text) {
+        var loweredText = text.toLowerCase();
+        var words = loweredText.split(" ");
+        for (var a = 0; a < words.length; a++) {
+            var w = words[a];
+    
+            var firstLetter = w[0];
+    
+            if( w.length > 2){ 
+               w = firstLetter.toUpperCase() + w.slice(1);
+            } else {
+               w = firstLetter + w.slice(1);
+            }
+    
+            words[a] = w;
+        }
+        return words.join(" ");
+    }
+
+    const handleClick = useCallback(
+        async event => {
+          event.preventDefault();
+          const { search } = event.target.elements;
+          try {
+                history.push(`admin/search/${titleize(search.value)}`);
+          } catch (error) {
+            alert(error);
+          }
+        },
+        []
+      );
+
     return (
     <>
     <div className="header">
@@ -23,6 +58,13 @@ function Header({dashboard}) {
         </label>
 
         {dashboard === true && (
+            <>
+            {account == false && (
+                <form id="search" onSubmit={handleClick}>
+                    <input style={{marginRight: "20px", border: "none", borderRadius: "5px"}} type="search" name="search" id=""/>
+                    <input id="in1" style={{ background: "#f8c52c", color: "#fff"}} type="submit" value="Pesquisar"/>
+                </form>
+            )}
             <ul className="menu" id="#f8a213">
                 {email == 'admin@admin.com' ? <Link to="/dashboard/admin">Página Inicial</Link> : <Link to="/dashboard">Página Inicial</Link>}
                 <Link to="/account">Conta</Link>
@@ -30,6 +72,7 @@ function Header({dashboard}) {
                     <i className="fas fa-times"></i>
                 </label>
             </ul>
+            </>
         )}
         {dashboard === false && (
             <ul className="menu" id="#f8a213">

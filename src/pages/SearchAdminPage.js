@@ -1,5 +1,5 @@
 import React,{ useState, useEffect } from "react";
-import { Link, Redirect } from 'react-router-dom';
+import { Link, Redirect, useParams } from 'react-router-dom';
 import { confirmAlert } from 'react-confirm-alert';
 import 'react-confirm-alert/src/react-confirm-alert.css';
 import Header from './../components/Header';
@@ -9,9 +9,10 @@ import './styles/admindashboard.css'
 import api from './../services/api'
 
 
-const AdminDashboard = () => {
+const SearchAdminPage = () => {
   var user = firebase.auth().currentUser;
   var name,email, photoUrl, uid;
+  const {search} = useParams();
 
   if (user != null) {
     name = user.displayName;
@@ -22,9 +23,32 @@ const AdminDashboard = () => {
   const libries = [];
   const [cu,setCu] = useState([]);
   
+  function titleize(text) {
+    var loweredText = text.toLowerCase();
+    var words = loweredText.split(" ");
+    for (var a = 0; a < words.length; a++) {
+        var w = words[a];
+
+        var firstLetter = w[0];
+
+        if( w.length > 2){ 
+           w = firstLetter.toUpperCase() + w.slice(1);
+        } else {
+           w = firstLetter + w.slice(1);
+        }
+
+        words[a] = w;
+    }
+    return words.join(" ");
+}
+
 
   useEffect(() => {
-    api.get(`libries`).then(liuser => {
+    api.get('search', {
+      params: {
+        search: titleize(search),
+      }
+    }).then(liuser => {
       setCu(liuser.data);
     })
   }, [cu]);
@@ -56,11 +80,9 @@ const AdminDashboard = () => {
 
   return (
     <>
-      <Header dashboard={true} account={false}/>
-      {name && (<Title setTitle={`Bem-Vindo, ${name}!`}/>)}
-      {!name && (<Title setTitle={`Bem-Vindo!`}/>)}
+      <Header dashboard={true} account={true}/>
       <div id="caduser">
-        <h2>Expressões Cadastradas</h2>
+        <h2>{`Resultado da Busca: ${search}`}</h2>
       </div>
       <div className="section">
         {cu.map(lib => {
@@ -88,7 +110,7 @@ const AdminDashboard = () => {
         })}
 
         {cu.length == 0 && (
-          <h2 style={{color:"#aaa"}}>Você não tem Nenhuma Expressão Cadastrada!</h2>
+          <h2 style={{color:"#aaa"}}>Nenhuma Expressão Encontrada!</h2>
         )}
         
       </div>
@@ -96,4 +118,4 @@ const AdminDashboard = () => {
   );
 };
 
-export default AdminDashboard;
+export default SearchAdminPage;

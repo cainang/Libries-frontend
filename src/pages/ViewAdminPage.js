@@ -25,6 +25,8 @@ const ViewAdminPage = () => {
     var p1 = "https://www.youtube.com/";
     var p2 = editUrl.slice(17,editUrl.length);
     var p3 = `${p1}embed/${p2}`;
+  } else {
+    var p3 = editUrl;
   }
   
 

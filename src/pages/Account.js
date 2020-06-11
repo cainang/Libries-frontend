@@ -20,7 +20,7 @@ const Account = () => {
   }
   return (
     <>
-      <Header dashboard={true}/>
+      <Header dashboard={true} account={true}/>
       <Title setTitle="Sua Conta" />
       <div className="section">
           <div className="profile">

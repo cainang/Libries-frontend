@@ -13,6 +13,23 @@
     color: #fff;
 }
 
+#search{
+    position: absolute;
+    top: 40px;
+    left: 800px;
+}
+
+#search #in1{
+    padding: 3px 10px 3px 10px;
+    border-radius: 10px;
+    border: 2px solid #fff;
+}
+
+#search #in1:hover{
+    cursor: pointer;
+}
+
+
 .logo{
     line-height: 100px;
     float: left;

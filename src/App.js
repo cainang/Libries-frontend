@@ -18,6 +18,7 @@ import EditNamePage from "./pages/EditNamePage";
 import firebase from 'firebase';
 import app from "./firebase/base";
 import ViewAdminPage from "./pages/ViewAdminPage";
+import SearchAdminPage from "./pages/SearchAdminPage";
 
 const App = () => {
   
@@ -32,6 +33,7 @@ const App = () => {
           <PrivateRoute exact path="/cadex" component={CadastroPage} />
           <PrivateRoute exact path="/dashboard/edit/:idpage" component={EditPage} />
           <PrivateRoute exact path="/dashboard/admin/edit/:idpage" component={EditAdminPage} />
+          <PrivateRoute exact path="/dashboard/admin/search/:search" component={SearchAdminPage} />
           <PrivateRoute exact path="/dashboard/admin/view/:idpage" component={ViewAdminPage} />
           <PrivateRoute exact path="/account/editpass" component={EditPasswordPage} />
           <PrivateRoute exact path="/account/editname" component={EditNamePage} />
